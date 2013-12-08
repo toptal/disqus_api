@@ -1,4 +1,79 @@
+exports:
+  exportForum: post
+users:
+  listActiveForums: get
+  listActiveThreads: get
+  listFollowing: get
+  listForums: get
+  unfollow: post
+  listPosts: get
+  details: get
+  listFollowers: get
+  follow: post
+  listActivity: get
+  listMostActiveForums: get
+imports:
+  list: get
+  details: get
+posts:
+  restore: post
+  spam: post
+  unhighlight: post
+  listPopular: get
+  create: post
+  list: get
+  remove: post
+  getContext: get
+  vote: post
+  details: get
+  report: post
+  highlight: post
+  approve: post
+blacklists:
+  add: post
+  list: get
+  remove: post
+reports:
+  domains: get
+  ips: get
+  threads: get
+  users: get
+whitelists:
+  add: post
+  list: get
+  remove: post
+applications:
+  listUsage: get
+trends:
+  listThreads: get
+threads:
+  restore: post
+  vote: post
+  open: post
+  create: post
+  list: get
+  listMostLiked: get
+  listHot: get
+  update: post
+  listSimilar: get
+  details: get
+  listByDate: get
+  listPosts: get
+  close: post
+  remove: post
+  listPopular: get
 forums:
   create: post
-users:
+  listCategories: get
+  listThreads: get
+  listUsers: get
+  listMostLikedUsers: get
+  details: get
+  listPosts: get
+  listModerators: get
+categories:
+  listPosts: get
+  listThreads: get
+  create: post
+  list: get
   details: get
