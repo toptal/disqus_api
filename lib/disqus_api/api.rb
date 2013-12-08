@@ -44,21 +44,21 @@ module DisqusApi
     # @param [String] path
     # @param [Hash] arguments
     def get(path, arguments)
-      ::DisqusApi::Request.get(self, path, arguments)
+      connection.get(path, arguments).body
     end
 
     # Performs custom POST request
     # @param [String] path
     # @param [Hash] arguments
     def post(path, arguments)
-      ::DisqusApi::Request.post(self, path, arguments)
+      connection.post(path, arguments).body
     end
 
     # DisqusApi.v3.---->>[users]<<-----.details
     #
     # Forwards calls to API declared in YAML
     def method_missing(method_name, *args)
-      self.respond_to?(method_name) ? super : (namespaces[method_name] || super)
+      namespaces[method_name] or raise(ArgumentError, "No such namespace #{method_name}")
     end
   end
 end

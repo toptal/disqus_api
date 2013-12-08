@@ -1,3 +1,4 @@
 .ruby-version
 .idea
 Gemfile.lock
+spec/config/disqus.yml

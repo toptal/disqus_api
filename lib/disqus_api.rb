@@ -1,12 +1,13 @@
 require 'active_support/hash_with_indifferent_access'
+require 'active_support/core_ext/object/try'
 require 'yaml'
 require 'json'
 require 'faraday'
 require 'faraday_middleware'
 
-require 'ruby_disqus/api'
-require 'ruby_disqus/request'
-require 'ruby_disqus/namespace'
+require 'disqus_api/api'
+require 'disqus_api/request'
+require 'disqus_api/namespace'
 
 module DisqusApi
 
