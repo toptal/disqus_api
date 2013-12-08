@@ -6,8 +6,9 @@ require 'faraday'
 require 'faraday_middleware'
 
 require 'disqus_api/api'
-require 'disqus_api/request'
 require 'disqus_api/namespace'
+require 'disqus_api/request'
+require 'disqus_api/response'
 
 module DisqusApi
 

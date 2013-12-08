@@ -22,7 +22,7 @@ module DisqusApi
     # @param [Hash] arguments
     # @return [Hash] response
     def request_action(action, arguments = {})
-      build_action_request(action, arguments).perform
+      build_action_request(action, arguments).response
     end
     alias_method :perform_action, :request_action
 

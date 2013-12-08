@@ -20,7 +20,15 @@ module DisqusApi
       @arguments = arguments
     end
 
+    # Returns Disqus API response proxy
     # @param [Symbol] request_type
+    # @param [Hash] arguments
+    # @return [String]
+    def response(arguments = {})
+      Response.new(self, arguments)
+    end
+
+    # Returns plain JSON response received from Disqus
     # @param [Hash] arguments
     # @return [String]
     def perform(arguments = {})
@@ -31,7 +39,6 @@ module DisqusApi
         raise ArgumentError, "Unregistered request type #{request_type}"
       end
     end
-    alias_method :execute, :perform
 
     # @see #initialize
     # @param [String, Symbol] request_type

@@ -15,6 +15,9 @@ describe DisqusApi::Request do
   its(:path) { should == 'users/details.json' }
   its(:type) { should == :get }
   its(:arguments) { should == arguments }
+  its(:response) { should be_a(Hash) }
+  its(:response) { should be_a(::DisqusApi::Response) }
+  its(:response) { should have_key('code') }
 
   describe "#initialize" do
     context "invalid namespace" do

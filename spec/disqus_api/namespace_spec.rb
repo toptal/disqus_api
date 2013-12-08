@@ -29,6 +29,9 @@ describe DisqusApi::Namespace do
   context perform_requests: true do
     let(:request_path) { '/api/3.0/users/details.json' }
 
+    its(:details) { should be_a(Hash) }
+    its(:details) { should be_a(::DisqusApi::Response) }
+
     it 'performs requests' do
       namespace.details['code'].should == 0
     end
