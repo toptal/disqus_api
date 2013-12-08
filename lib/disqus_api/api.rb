@@ -25,11 +25,11 @@ module DisqusApi
       }
     end
 
-    # @return [Faraday]
+    # @return [Faraday::Connection]
     def connection
       @connection ||= begin
         Faraday.new(connection_options) do |builder|
-          builder.adapter(Faraday.default_adapter)
+          builder.adapter(*Faraday.default_adapter)
 
           builder.use Faraday::Request::Multipart
           builder.use Faraday::Request::UrlEncoded
@@ -43,14 +43,14 @@ module DisqusApi
     # Performs custom GET request
     # @param [String] path
     # @param [Hash] arguments
-    def get(path, arguments)
+    def get(path, arguments = {})
       connection.get(path, arguments).body
     end
 
     # Performs custom POST request
     # @param [String] path
     # @param [Hash] arguments
-    def post(path, arguments)
+    def post(path, arguments = {})
       connection.post(path, arguments).body
     end
 
@@ -59,6 +59,10 @@ module DisqusApi
     # Forwards calls to API declared in YAML
     def method_missing(method_name, *args)
       namespaces[method_name] or raise(ArgumentError, "No such namespace #{method_name}")
+    end
+
+    def respond_to?(method_name, include_private = false)
+      namespaces[method_name] || super
     end
   end
 end

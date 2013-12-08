@@ -1,2 +1,4 @@
+forums:
+  create: post
 users:
   details: get
