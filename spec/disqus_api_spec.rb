@@ -9,7 +9,7 @@ describe DisqusApi, perform_requests: true do
     end
   end
 
-  describe "posts list" do
+  describe "posts list", local: true do
     before :each do
       stubbed_requests.get("/api/3.0/posts/list.json?forum=toptal&access_token=&api_key=&api_secret=&limit=1")          { [200, {}, {code: 0, response: ['first_one'],  cursor: {hasNext: true,  next: 1}}.to_json] }
       stubbed_requests.get("/api/3.0/posts/list.json?cursor=1&forum=toptal&access_token=&api_key=&api_secret=&limit=1") { [200, {}, {code: 0, response: ['second_one'], cursor: {hasNext: true,  next: 2}}.to_json] }

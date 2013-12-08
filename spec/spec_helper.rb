@@ -10,6 +10,10 @@ else
   load_disqus_config("disqus.yml.example")
 
   shared_context "perform requests", perform_requests: true do
+    before do
+      @all_requests_local = true
+    end
+
     let(:request_path) { '' }
     let(:response_body) { nil }
     let(:response_code) { 0 }
@@ -32,4 +36,8 @@ RSpec.configure do |config|
   config.mock_with :rspec
   config.color_enabled = true
   config.formatter = :documentation
+
+  if ENV['USE_DISQUS_ACCOUNT']
+    config.filter_run_excluding local: true
+  end
 end
