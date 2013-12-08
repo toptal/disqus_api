@@ -23,7 +23,7 @@ else
 
     before :each do
       Faraday.default_adapter = [:test, stubbed_requests]
-      DisqusApi.v3.set_adapter([:test, stubbed_requests])
+      DisqusApi.v3.reset!
     end
   end
 end

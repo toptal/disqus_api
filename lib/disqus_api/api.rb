@@ -25,15 +25,11 @@ module DisqusApi
       }
     end
 
-    def adapter
-      @adapter || Faraday.default_adapter
-    end
-
     # @return [Faraday::Connection]
     def connection
       @connection ||= begin
         Faraday.new(connection_options) do |builder|
-          builder.adapter(*adapter)
+          builder.adapter(*Faraday.default_adapter)
 
           builder.use Faraday::Request::Multipart
           builder.use Faraday::Request::UrlEncoded
@@ -58,9 +54,8 @@ module DisqusApi
       connection.post(path, arguments).body
     end
 
-    def set_adapter(adapter)
+    def reset!
       @connection = nil
-      @adapter = adapter
     end
 
     # DisqusApi.v3.---->>[users]<<-----.details
