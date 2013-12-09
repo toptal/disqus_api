@@ -1,10 +1,4 @@
 module DisqusApi
-  class InvalidApiRequestError < Exception
-    def initialize(response, message = response.inspect)
-      super(response)
-    end
-  end
-
   class Api
     DEFAULT_VERSION = '3.0'
     attr_reader :version, :endpoint, :specifications, :namespaces

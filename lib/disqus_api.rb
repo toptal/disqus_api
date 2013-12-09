@@ -9,6 +9,7 @@ require 'disqus_api/api'
 require 'disqus_api/namespace'
 require 'disqus_api/request'
 require 'disqus_api/response'
+require 'disqus_api/invalid_api_request_error'
 
 module DisqusApi
 
