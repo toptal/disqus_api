@@ -1,9 +1,7 @@
 source "https://rubygems.org"
 
-gem 'active_support'
-gem 'faraday'
-gem 'faraday_middleware'
+gemspec
 
-group :development do
-  gem 'rspec'
+group :test do
+  gem "rspec"
 end

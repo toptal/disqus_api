@@ -1,4 +1,10 @@
+*.gem
+.yardoc
+rdoc
+coverage
+.bundle
 .ruby-version
+.rvmrc
 .idea
 Gemfile.lock
 spec/config/disqus.yml

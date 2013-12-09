@@ -58,10 +58,6 @@ module DisqusApi
       perform_request { connection.post(path, arguments).body }
     end
 
-    def reset!
-      @connection = nil
-    end
-
     # DisqusApi.v3.---->>[users]<<-----.details
     #
     # Forwards calls to API declared in YAML

@@ -45,6 +45,7 @@ module DisqusApi
     def body
       self['response']
     end
+    alias_method :response, :body
 
     # @return [Integer]
     def code
