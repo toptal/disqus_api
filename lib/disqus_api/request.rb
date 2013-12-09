@@ -2,7 +2,7 @@ module DisqusApi
   class Request
     attr_reader :api, :path, :namespace, :action, :arguments, :type
 
-    # @param [Class<DisqusApi::Api>] api
+    # @param [DisqusApi::Api] api
     # @param [String] namespace
     # @param [String] action
     # @param [Hash] arguments Request parameters

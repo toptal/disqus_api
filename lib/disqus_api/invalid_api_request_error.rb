@@ -1,7 +1,10 @@
 module DisqusApi
-  class InvalidApiRequestError < Exception
+  class InvalidApiRequestError < StandardError
+    attr_reader :response
+
     def initialize(response, message = response.inspect)
-      super(response)
+      @response = response
+      super(message)
     end
   end
 end
