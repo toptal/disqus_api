@@ -22,7 +22,7 @@ module DisqusApi
 
   # @return [ActiveSupport::HashWithIndifferentAccess]
   def self.config
-    @config || raise("No configuration specified for Disqus")
+    @config || {}
   end
 
   # @param [Hash] config

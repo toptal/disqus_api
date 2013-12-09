@@ -106,6 +106,26 @@ it 'performs requests' do
 end
 ```
 
+### Running specs
+
+Use any of the following commands from the project directory:
+
+```bash
+rspec
+```
+
+```bash
+rake
+```
+
+In order to test on a real Discus account
+- specify `spec/config/disqus.yml` (see `spec/config/disqus.yml.example` for details)
+- run specs passing `USE_DISQUS_ACCOUNT` environment variable:
+
+```bash
+USE_DISQUS_ACCOUNT=1 rspec
+```
+
 ## Contributing to disqus_api
 
 - Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
