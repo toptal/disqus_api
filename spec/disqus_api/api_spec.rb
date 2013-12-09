@@ -35,14 +35,34 @@ describe DisqusApi::Api do
     it 'performs GET request' do
       api.get(request_path)['code'].should == 0
     end
+
+    context "invalid request" do
+      let(:request_path) { '/api/3.0/invalid/request.json' }
+      let(:response_code) { 1 }
+
+      specify do
+        expect { api.get(request_path) }.to raise_error(DisqusApi::InvalidApiRequestError, /"code"=>1/)
+      end
+    end
   end
 
   describe "#post", perform_requests: true do
     let(:request_type) { :post }
     let(:request_path) { '/api/3.0/forums/create.json' }
 
-    it 'performs GET request' do
-      api.post(request_path)['code'].should == 0
+    context local: true do
+      it 'performs POST request' do
+        api.post(request_path)['code'].should == 0
+      end
+    end
+
+    context "invalid request" do
+      let(:request_path) { '/api/3.0/invalid/request.json' }
+      let(:response_code) { 1 }
+
+      specify do
+        expect { api.post(request_path) }.to raise_error(DisqusApi::InvalidApiRequestError, /"code"=>1/)
+      end
     end
   end
 end

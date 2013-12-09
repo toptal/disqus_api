@@ -12,6 +12,14 @@ require 'disqus_api/response'
 
 module DisqusApi
 
+  def self.adapter
+    @adapter || Faraday.default_adapter
+  end
+
+  def self.adapter=(value)
+    @adapter = value
+  end
+
   # @return [ActiveSupport::HashWithIndifferentAccess]
   def self.config
     @config || raise("No configuration specified for Disqus")

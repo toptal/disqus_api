@@ -1,4 +1,10 @@
 module DisqusApi
+  class InvalidApiRequestError < Exception
+    def initialize(response, message = response.inspect)
+      super(response)
+    end
+  end
+
   class Api
     DEFAULT_VERSION = '3.0'
     attr_reader :version, :endpoint, :specifications, :namespaces
@@ -27,16 +33,14 @@ module DisqusApi
 
     # @return [Faraday::Connection]
     def connection
-      @connection ||= begin
-        Faraday.new(connection_options) do |builder|
-          builder.adapter(*Faraday.default_adapter)
+      Faraday.new(connection_options) do |builder|
+        builder.use Faraday::Request::Multipart
+        builder.use Faraday::Request::UrlEncoded
+        builder.use Faraday::Response::ParseJson
 
-          builder.use Faraday::Request::Multipart
-          builder.use Faraday::Request::UrlEncoded
-          builder.use Faraday::Response::ParseJson
+        builder.params.merge!(DisqusApi.config)
 
-          builder.params.merge!(DisqusApi.config)
-        end
+        builder.adapter(*DisqusApi.adapter)
       end
     end
 
@@ -44,14 +48,14 @@ module DisqusApi
     # @param [String] path
     # @param [Hash] arguments
     def get(path, arguments = {})
-      connection.get(path, arguments).body
+      perform_request { connection.get(path, arguments).body }
     end
 
     # Performs custom POST request
     # @param [String] path
     # @param [Hash] arguments
     def post(path, arguments = {})
-      connection.post(path, arguments).body
+      perform_request { connection.post(path, arguments).body }
     end
 
     def reset!
@@ -67,6 +71,14 @@ module DisqusApi
 
     def respond_to?(method_name, include_private = false)
       namespaces[method_name] || super
+    end
+
+    private
+
+    def perform_request
+      yield.tap do |response|
+        raise InvalidApiRequestError.new(response) if response['code'] != 0
+      end
     end
   end
 end
