@@ -4,6 +4,8 @@
 
 Provides clean Disqus REST API for your Ruby app. Currently supported API version: 3.0.
 
+See also [Disqus API for Rails](https://github.com/einzige/disqus_api_rails).
+
 ## Install
 
 ```bash
@@ -13,6 +15,8 @@ gem install disqus_api
 ## Configure
 
 ```ruby
+require 'disqus_api'
+
 DisqusApi.config = {api_secret: 'secret key',
                     api_key: 'public key',
                     access_token: 'token from app settings'}
