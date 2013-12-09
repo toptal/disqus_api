@@ -23,23 +23,21 @@ DisqusApi.config = {api_secret: 'secret key',
 
 ```ruby
 DisqusApi.v3.users.details
-
 # => {"code" => 0, "response" => {
-#                                   "isFollowing"=>false,
-#                                   "isFollowedBy"=>false, "connections"=>{}, "isPrimary"=>true, "id"=>"84792962"
-#                                   # ...
-#                                }
+#                     "isFollowing"=>false,
+#                     "isFollowedBy"=>false, "connections"=>{}, "isPrimary"=>true, "id"=>"84792962"
+#                     ...
+#                  }
 ```
 
 Use response to get response body
 
 ```ruby
 DisqusApi.v3.users.details.response
-
 # => {
 #       "isFollowing"=>false,
 #       "isFollowedBy"=>false, "connections"=>{}, "isPrimary"=>true, "id"=>"84792962"
-#       # ...
+#       ...
 #    }
 ```
 
@@ -47,7 +45,6 @@ Alias `#body` for response body
 
 ```ruby
 DisqusApi.v3.users.details.body
-
 # => {
 #       "isFollowing"=>false,
 #       "isFollowedBy"=>false, "connections"=>{}, "isPrimary"=>true, "id"=>"84792962"
@@ -73,7 +70,11 @@ DisqusApi.v3.posts.list(forum: 'my_form').all
 ### Pagination
 
 ```ruby
-DisqusApi.v3.posts.list(forum: 'my_forum').next
+first_page  = DisqusApi.v3.posts.list(forum: 'my_forum', limit: 10)
+
+second_page = first_page.next
+third_page  = second_page.next
+# ...
 ```
 
 ### Performing custom requests
