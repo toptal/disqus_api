@@ -61,7 +61,7 @@ DisqusApi.v3.posts.list(forum: 'my_form')
 ### Fetching full collections
 
 By default Disqus API limits returning collections by 25 records per requests. The maximum limit you can set is 100.
-In order to fetch *all records* from a collection use `#all` method:
+In order to fetch **all records** from a collection use `#all` method:
 
 ```ruby
 DisqusApi.v3.posts.list(forum: 'my_form').all
