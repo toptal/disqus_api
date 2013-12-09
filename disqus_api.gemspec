@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'activesupport', ">= 3.0.0"
   s.add_runtime_dependency 'faraday', ">= 0.8"
   s.add_runtime_dependency 'faraday_middleware', ">= 0.9"
-  s.add_development_dependency 'bundler'
+  s.add_development_dependency 'rspec'
 end
 

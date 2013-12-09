@@ -114,8 +114,8 @@ Use any of the following commands from the project directory:
 rspec
 ```
 
-```bash
-rake
+```ruby
+rake # rake gem must be installed
 ```
 
 In order to test on a real Discus account
