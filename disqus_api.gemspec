@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{disqus_api}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.date = %q{2013-12-09}
-  s.authors = ["Sergei Zinin"]
+  s.authors = ["Sergei Zinin (einzige)"]
   s.email = %q{szinin@gmail.com}
-  s.homepage = %q{http://github.com/einzige/disqus_api}
+  s.homepage = %q{http://github.com/toptal/disqus_api}
 
   s.licenses = ["MIT"]
 

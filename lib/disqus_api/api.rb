@@ -32,7 +32,7 @@ module DisqusApi
         builder.use Faraday::Request::UrlEncoded
         builder.use Faraday::Response::ParseJson
 
-        builder.params.merge!(DisqusApi.config)
+        builder.params.merge!(DisqusApi.config.slice(:api_secret, :api_key, :access_token))
 
         builder.adapter(*DisqusApi.adapter)
       end
