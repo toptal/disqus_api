@@ -1,6 +1,7 @@
 # Disqus API for Ruby
 [![Gem Version](https://badge.fury.io/rb/disqus_api.png)](http://badge.fury.io/rb/disqus_api)
 [![Build Status](https://travis-ci.org/toptal/disqus_api.png?branch=master)](https://travis-ci.org/toptal/disqus_api)
+[![Code Climate](https://codeclimate.com/repos/52ab1c4c7e00a455db041687/badges/69e7a7201240be64f8de/gpa.png)](https://codeclimate.com/repos/52ab1c4c7e00a455db041687/feed)
 
 Provides clean Disqus REST API for your Ruby app. Currently supported API version: 3.0.
 
