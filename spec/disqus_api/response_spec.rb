@@ -79,7 +79,7 @@ describe DisqusApi::Response do
     end
   end
 
-  describe "#next" do
+  describe "#prev" do
     context "has previous page" do
       let(:response_body) { {'cursor' => {'hasPrev' => true, 'prev' => 'another_page'}} }
       let(:prev_page_response) { double('prev_page_response') }
