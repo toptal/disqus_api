@@ -108,6 +108,12 @@ response = DisqusApi.v3.posts
 response.next!
 ```
 
+Or on previous one:
+
+```ruby
+response.prev!
+```
+
 ### Performing custom requests
 
 ```ruby
