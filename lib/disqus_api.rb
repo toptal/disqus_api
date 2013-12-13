@@ -11,9 +11,10 @@ require 'disqus_api/namespace'
 require 'disqus_api/request'
 require 'disqus_api/response'
 require 'disqus_api/invalid_api_request_error'
+require 'disqus_api/rails'
 
 module DisqusApi
-  VERSION = '0.0.3'
+  VERSION = '0.0.4'
 
   def self.adapter
     @adapter || Faraday.default_adapter
