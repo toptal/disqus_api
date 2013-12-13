@@ -102,20 +102,17 @@ describe DisqusApi::Response do
 
     context "building a enumerator" do
       before do
+        request.should_not_receive(:prev)
         request.should_not_receive(:next)
         request.should_not_receive(:perform)
       end
 
       describe "#each_page" do
-        it 'acts as iterator' do
-          subject.each_page
-        end
+        specify { subject.each_page }
       end
 
       describe "#each_resource" do
-        it 'acts as iterator' do
-          subject.each_resource
-        end
+        specify { subject.each_resource }
       end
     end
 
