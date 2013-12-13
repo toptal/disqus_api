@@ -1,4 +1,5 @@
 require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/core_ext/hash/slice'
 require 'active_support/core_ext/object/try'
 require 'yaml'
 require 'json'
@@ -12,6 +13,7 @@ require 'disqus_api/response'
 require 'disqus_api/invalid_api_request_error'
 
 module DisqusApi
+  VERSION = '0.0.3'
 
   def self.adapter
     @adapter || Faraday.default_adapter
@@ -38,6 +40,11 @@ module DisqusApi
   # @return [Api]
   def self.init(version)
     Api.new(version, YAML.load_file(File.join(File.dirname(__FILE__), "apis/#{version}.yml")))
+  end
+
+  def self.stub_requests(&block)
+    stubbed_requests = Faraday::Adapter::Test::Stubs.new(&block)
+    DisqusApi.adapter = [:test, stubbed_requests]
   end
 
   # @return [Api]

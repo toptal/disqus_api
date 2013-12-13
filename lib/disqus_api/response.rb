@@ -12,17 +12,43 @@ module DisqusApi
       super(@content)
     end
 
-    # Fetches all records going through pagination
+    # Fetches all response collection entries going through pagination
     # @return [Array<Hash>]
     def all
-      [].tap do |result|
+      each_resource.to_a
+    end
+
+    # Iterates through each response entry through all pages
+    # @return [Enumerator<Hash>]
+    def each_resource(&block)
+      Enumerator.new do |result|
+        each_page { |resources| resources.each { |resource| result << resource } }
+      end.each(&block)
+    end
+
+    # Iterates through every single page
+    # @return [Enumerator<Array<Hash>>]
+    def each_page(&block)
+      Enumerator.new do |result|
         next_response = self
 
         while next_response
-          result.concat(next_response.body)
+          result << next_response.body.to_a
           next_response = next_response.next
         end
-      end
+      end.each(&block)
+    end
+
+    # @return [Response]
+    def next!
+      self.merge!(self.next) if has_next?
+      self
+    end
+
+    # @return [Response]
+    def prev!
+      self.merge!(self.prev) if has_prev?
+      self
     end
 
     # @return [Response, nil]
@@ -32,13 +58,29 @@ module DisqusApi
       end
     end
 
+    # @return [Response, nil]
+    def prev
+      if has_prev?
+        request.response(arguments.merge(cursor: prev_cursor))
+      end
+    end
+
     def has_next?
       self['cursor']['hasNext']
+    end
+
+    def has_prev?
+      self['cursor']['hasPrev']
     end
 
     # @return [String]
     def next_cursor
       self['cursor']['next']
+    end
+
+    # @return [String]
+    def prev_cursor
+      self['cursor']['prev']
     end
 
     # @return [Hash]

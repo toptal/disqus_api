@@ -1,10 +1,10 @@
 # Disqus API for Ruby
 [![Gem Version](https://badge.fury.io/rb/disqus_api.png)](http://badge.fury.io/rb/disqus_api)
-[![Build Status](https://travis-ci.org/einzige/disqus_api.png?branch=master)](https://travis-ci.org/einzige/disqus_api)
+[![Build Status](https://travis-ci.org/toptal/disqus_api.png?branch=master)](https://travis-ci.org/toptal/disqus_api)
 
 Provides clean Disqus REST API for your Ruby app. Currently supported API version: 3.0.
 
-See also [Disqus API for Rails](https://github.com/einzige/disqus_api_rails).
+See also [Disqus API for Rails](https://github.com/toptal/disqus_api_rails).
 
 ## Install
 
@@ -72,12 +72,40 @@ DisqusApi.v3.posts.list(forum: 'my_form').all
 
 ### Pagination
 
+Step by step:
+
 ```ruby
 first_page  = DisqusApi.v3.posts.list(forum: 'my_forum', limit: 10)
 
 second_page = first_page.next
 third_page  = second_page.next
+first_page  = thrid_page.prev.prev
 # ...
+```
+
+It is useful to go through all records. This way you will pass every page in batches by 10:
+
+```ruby
+DisqusApi.v3.posts.list(limit: 10).each_resource do |comment|
+  puts comment.inspect
+end
+```
+
+You can also iterate collection page by page.
+
+```ruby
+DisqusApi.v3.posts.each_page do |comments|
+  comments.each do |comment|
+    puts comment.inspect
+  end
+end
+```
+
+You can also move on next page:
+
+```ruby
+response = DisqusApi.v3.posts
+response.next!
 ```
 
 ### Performing custom requests
@@ -87,24 +115,37 @@ DisqusApi.v3.get('posts/list.json', forum: 'my_forum')
 DisqusApi.v3.post('posts/create.json', forum: 'my_forum')
 ```
 
-### Using in test environment
+### Handling exceptions
 
-Disqus API uses Faraday gem, refer to its documentation for details.
+Just catch `DisqusApi::InvalidApiRequestError`. It has `code` to identify problems with a request.
+
+```ruby
+begin
+  DisqusApi.v3.posts.list(forum: 'something-wrong')
+rescue DisqusApi::InvalidApiRequestError => e
+  e.response.inspect
+end
+
+#=> {"code"=>2, "response"=>"Invalid argument, 'forum': Unable to find forum 'something-wrong'"}
+```
+
+### Using in test environment
 
 ```ruby
 before :all do
   # You can move this block in RSpec initializer or `spec_helper.rb`
 
-  stubbed_request = Faraday::Adapter::Test::Stubs.new do |stub|
+  DisqusApi.stub_requests do |stub|
     stub.get('/api/3.0/users/details.json') { [200, {}, {code: 0, body: {response: :whatever}}.to_json] }
   end
-  DisqusApi.adapter = [:test, stubbed_requests]
 end
 
 it 'performs requests' do
   DisqusApi.v3.users.details['code'].should == 0
 end
 ```
+
+Disqus API uses Faraday gem, refer to its documentation for details.
 
 ### Running specs
 
