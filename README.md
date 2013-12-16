@@ -32,13 +32,13 @@ Put in your `config/disqus_api.yml`:
 ```yaml
 development:
   api_secret: development_secret_key
-  api_key: 'public key',
-  access_token: 'token from app settings'}
+  api_key: 'public key'
+  access_token: 'token from app settings'
 
 production:
   api_secret: production_secret_key
-  api_key: 'public key',
-  access_token: 'token from app settings'}
+  api_key: 'public key'
+  access_token: 'token from app settings'
 
 # ... any other env
 ```
