@@ -29,7 +29,7 @@ For **Rails** users:
 
 Put in your `config/disqus_api.yml`:
 
-```ruby
+```yaml
 development:
   api_secret: development_secret_key
   api_key: 'public key',
