@@ -11,7 +11,7 @@ require 'disqus_api/namespace'
 require 'disqus_api/request'
 require 'disqus_api/response'
 require 'disqus_api/invalid_api_request_error'
-require 'disqus_api/rails'
+require 'disqus_api/railtie' if defined?(Rails)
 
 module DisqusApi
   VERSION = '0.0.4'
