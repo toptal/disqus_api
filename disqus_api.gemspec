@@ -1,8 +1,5 @@
 # -*- encoding: utf-8 -*-
-$:.push File.expand_path("../lib", __FILE__)
-
-# Maintain your gem's version:
-require "disqus_api/version"
+require File.expand_path('../lib/version', __FILE__)
 
 Gem::Specification.new do |s|
   s.name = %q{disqus_api}
