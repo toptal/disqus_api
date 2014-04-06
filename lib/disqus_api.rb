@@ -14,7 +14,6 @@ require 'disqus_api/invalid_api_request_error'
 require 'disqus_api/railtie' if defined?(Rails)
 
 module DisqusApi
-  VERSION = '0.0.4'
 
   def self.adapter
     @adapter || Faraday.default_adapter
