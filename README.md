@@ -100,7 +100,7 @@ first_page  = DisqusApi.v3.posts.list(forum: 'my_forum', limit: 10)
 
 second_page = first_page.next
 third_page  = second_page.next
-first_page  = thrid_page.prev.prev
+first_page  = third_page.prev.prev
 # ...
 ```
 
