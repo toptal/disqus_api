@@ -186,7 +186,7 @@ rspec
 rake # rake gem must be installed
 ```
 
-In order to test on a real Discus account
+In order to test on a real Disqus account
 - specify `spec/config/disqus.yml` (see `spec/config/disqus.yml.example` for details)
 - run specs passing `USE_DISQUS_ACCOUNT` environment variable:
 
