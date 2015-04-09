@@ -20,24 +20,24 @@ describe DisqusApi::Response do
   describe "#has_next?" do
     context "has" do
       let(:response_body) { {'cursor' => {'hasNext' => true}} }
-      its(:has_next?) { should be_true }
+      its(:has_next?) { is_expected.to be true }
     end
 
     context 'has not' do
       let(:response_body) { {'cursor' => {'hasNext' => false}} }
-      its(:has_next?) { should be_false }
+      its(:has_next?) { is_expected.to be false  }
     end
   end
 
   describe "#has_prev?" do
     context "has" do
       let(:response_body) { {'cursor' => {'hasPrev' => true}} }
-      its(:has_prev?) { should be_true }
+      its(:has_prev?) { is_expected.to be true }
     end
 
     context 'has not' do
       let(:response_body) { {'cursor' => {'hasPrev' => false}} }
-      its(:has_prev?) { should be_false }
+      its(:has_prev?) { is_expected.to be false }
     end
   end
 

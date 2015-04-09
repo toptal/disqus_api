@@ -6,7 +6,7 @@ describe DisqusApi::Namespace do
   let(:specifications) { {'users' => {'details' => 'get'}} }
 
   let(:namespace_name) { 'users' }
-  subject(:namespace) { described_class.new(api, namespace_name) }
+  subject(:namespace) { DisqusApi::Namespace.new(api, namespace_name) }
 
   its(:api) { should == api }
   its(:specification) { should == {'details' => 'get'} }

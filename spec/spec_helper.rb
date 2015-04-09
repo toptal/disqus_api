@@ -1,4 +1,5 @@
 require 'disqus_api'
+require 'rspec/its'
 
 def load_disqus_config(fname)
   DisqusApi.config = YAML.load_file(File.join(File.dirname(__FILE__), "config/#{fname}"))
@@ -33,7 +34,7 @@ end
 
 RSpec.configure do |config|
   config.mock_with :rspec
-  config.color_enabled = true
+  config.color = true
   config.formatter = :documentation
 
   if ENV['USE_DISQUS_ACCOUNT']

@@ -29,6 +29,7 @@ posts:
   report: post
   highlight: post
   approve: post
+  update: post
 blacklists:
   add: post
   list: get

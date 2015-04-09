@@ -49,10 +49,11 @@ describe DisqusApi::Api do
   describe "#post", perform_requests: true do
     let(:request_type) { :post }
     let(:request_path) { '/api/3.0/forums/create.json' }
+    let(:request_args) { {name: 'TestRspec', short_name: 'tspec', website: 'http://disqus.com'} } # no way!
 
-    context local: true do
+    context "local", local: true do
       it 'performs POST request' do
-        api.post(request_path)['code'].should == 0
+        api.post(request_path, request_args)['code'].should == 0
       end
     end
 
