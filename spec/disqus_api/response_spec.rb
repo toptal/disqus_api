@@ -14,7 +14,7 @@ describe DisqusApi::Response do
   let(:response_body) { {} }
 
   before do
-    request.should_receive(:perform).with(arguments).and_return(response_body)
+    expect(request).to receive(:perform).with(arguments).and_return(response_body)
   end
 
   describe "#has_next?" do
@@ -67,7 +67,7 @@ describe DisqusApi::Response do
       let(:next_page_response) { double('next_page_response') }
 
       before do
-        request.should_receive(:response).with({limit: 1, cursor: 'another_page'}).and_return(next_page_response)
+        expect(request).to receive(:response).with({limit: 1, cursor: 'another_page'}).and_return(next_page_response)
       end
 
       its(:next) { should == next_page_response }
@@ -85,7 +85,7 @@ describe DisqusApi::Response do
       let(:prev_page_response) { double('prev_page_response') }
 
       before do
-        request.should_receive(:response).with({limit: 1, cursor: 'another_page'}).and_return(prev_page_response)
+        expect(request).to receive(:response).with({limit: 1, cursor: 'another_page'}).and_return(prev_page_response)
       end
 
       its(:prev) { should == prev_page_response }
@@ -102,9 +102,9 @@ describe DisqusApi::Response do
 
     context "building a enumerator" do
       before do
-        request.should_not_receive(:prev)
-        request.should_not_receive(:next)
-        request.should_not_receive(:perform)
+        expect(request).not_to receive(:prev)
+        expect(request).not_to receive(:next)
+        expect(request).not_to receive(:perform)
       end
 
       describe "#each_page" do
@@ -118,7 +118,7 @@ describe DisqusApi::Response do
 
     context "multiple pages" do
       before do
-        request.should_receive(:perform).with(arguments.merge(cursor: 'another_page')).and_return(another_page_response_body)
+        expect(request).to receive(:perform).with(arguments.merge(cursor: 'another_page')).and_return(another_page_response_body)
       end
 
       let(:page_1_elem_1) { double('page_1_elem_1') }
@@ -179,8 +179,8 @@ describe DisqusApi::Response do
         end
 
         it 'iterates through each page' do
-          page_1_elem_1.should_receive(:get_block_message)
-          page_2_elem_1.should_receive(:get_block_message)
+          expect(page_1_elem_1).to receive(:get_block_message)
+          expect(page_2_elem_1).to receive(:get_block_message)
 
           subject.each_page { |page| page.each(&:get_block_message) }
         end
@@ -192,8 +192,8 @@ describe DisqusApi::Response do
         end
 
         it 'iterates through each resource' do
-          page_1_elem_1.should_receive(:get_block_message)
-          page_2_elem_1.should_receive(:get_block_message)
+          expect(page_1_elem_1).to receive(:get_block_message)
+          expect(page_2_elem_1).to receive(:get_block_message)
 
           subject.each_resource(&:get_block_message)
         end

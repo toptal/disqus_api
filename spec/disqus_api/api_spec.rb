@@ -6,24 +6,24 @@ describe DisqusApi::Api do
   let(:version) { '3.0' }
   let(:specifications) { {'users' => 'details'} }
 
-  its(:version) { should == version }
-  its(:specifications) { should == specifications }
+  its(:version) { should eq(version) }
+  its(:specifications) { should eq(specifications) }
   its(:namespaces) { should have_key(:users) }
-  its(:endpoint) { should == 'https://disqus.com/api/3.0/' }
+  its(:endpoint) { should eq('https://disqus.com/api/3.0/') }
   it { should respond_to(:users) }
   its(:users) { should be_a(DisqusApi::Namespace) }
-  its(:connection_options) { should == {headers: {"Accept"=>"application/json", "User-Agent"=>"DisqusAgent"},
-                                        ssl: {verify: false},
-                                        url: "https://disqus.com/api/3.0/"} }
+  its(:connection_options) { should eq ({headers: {"Accept"=>"application/json", "User-Agent"=>"DisqusAgent"},
+                                         ssl: {verify: false},
+                                         url: "https://disqus.com/api/3.0/"}) }
 
   describe "unregistered namespace metacalls" do
-    it { should_not respond_to(:foo) }
+    it { is_expected.not_to respond_to(:foo) }
     specify { expect { api.foo }.to raise_error(ArgumentError) }
   end
 
   describe "#connection" do
     subject { api.connection }
-    it { should be_a(Faraday::Connection) }
+    it { is_expected.to be_a(Faraday::Connection) }
     its(:params) { should have_key('api_key') }
     its(:params) { should have_key('api_secret') }
     its(:params) { should have_key('access_token') }
@@ -33,7 +33,7 @@ describe DisqusApi::Api do
     let(:request_path) { '/api/3.0/users/details.json' }
 
     it 'performs GET request' do
-      api.get(request_path)['code'].should == 0
+      expect(api.get(request_path)['code']).to eq(0)
     end
 
     context "invalid request" do
@@ -53,7 +53,7 @@ describe DisqusApi::Api do
 
     context "local", local: true do
       it 'performs POST request' do
-        api.post(request_path, request_args)['code'].should == 0
+        expect(api.post(request_path, request_args)['code']).to eq(0)
       end
     end
 
