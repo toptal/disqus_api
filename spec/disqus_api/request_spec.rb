@@ -33,13 +33,13 @@ describe DisqusApi::Request do
 
   describe "#perform" do
     it 'sends request through API' do
-      request.perform['code'].should == 0
+      expect(request.perform['code']).to eq(0)
     end
   end
 
   describe ".perform" do
     it 'sends request through API' do
-      described_class.perform(api, namespace, action, arguments)['code'].should == 0
+      expect(described_class.perform(api, namespace, action, arguments)['code']).to eq(0)
     end
   end
 end

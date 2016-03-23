@@ -5,7 +5,7 @@ describe DisqusApi, perform_requests: true do
     let(:request_path) { '/api/3.0/users/details.json' }
 
     it 'performs requests' do
-      DisqusApi.v3.users.details['code'].should == 0
+      expect(DisqusApi.v3.users.details['code']).to eq(0)
     end
   end
 
@@ -18,7 +18,7 @@ describe DisqusApi, perform_requests: true do
     end
 
     it 'fetches all comments' do
-      DisqusApi.v3.posts.list(forum: 'my_forum', limit: 1).all.should == %w{first_one second_one third_one}
+      expect(DisqusApi.v3.posts.list(forum: 'my_forum', limit: 1).all).to eq(%w{first_one second_one third_one})
     end
   end
 end

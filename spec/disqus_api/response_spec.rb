@@ -134,17 +134,17 @@ describe DisqusApi::Response do
 
       describe "#next!" do
         before { response.next! }
-        it { should be_a(described_class) }
+        it { is_expected.to be_a(described_class) }
 
         it 'steps on next page' do
-          response['page'].should == 2
+          expect(response['page']).to eq(2)
         end
 
         context "no next" do
           before { response.next! }
 
           it 'does nothing' do
-            response['page'].should == 2
+            expect(response['page']).to eq(2)
           end
         end
       end
@@ -158,24 +158,24 @@ describe DisqusApi::Response do
         }
 
         before { response.prev! }
-        it { should be_a(described_class) }
+        it { is_expected.to be_a(described_class) }
 
         it 'steps on previous page' do
-          response['page'].should == 1
+          expect(response['page']).to eq(1)
         end
 
         context "no previous" do
           before { response.prev! }
 
           it 'does nothing' do
-            response['page'].should == 1
+            expect(response['page']).to eq(1)
           end
         end
       end
 
       describe "#each_page" do
         it 'returns each page' do
-          subject.each_page.to_a.should == [[page_1_elem_1], [page_2_elem_1]]
+          expect(subject.each_page.to_a).to eq([[page_1_elem_1], [page_2_elem_1]])
         end
 
         it 'iterates through each page' do
@@ -188,7 +188,7 @@ describe DisqusApi::Response do
 
       describe "#each_resource" do
         it 'returns each record iterator' do
-          subject.each_resource.to_a.should == [page_1_elem_1, page_2_elem_1]
+          expect(subject.each_resource.to_a).to eq([page_1_elem_1, page_2_elem_1])
         end
 
         it 'iterates through each resource' do
