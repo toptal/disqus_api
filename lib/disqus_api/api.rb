@@ -42,14 +42,14 @@ module DisqusApi
     # @param [String] path
     # @param [Hash] arguments
     def get(path, arguments = {})
-      perform_request { connection.get(path, arguments).body }
+      perform_request { connection.get(path, arguments) }
     end
 
     # Performs custom POST request
     # @param [String] path
     # @param [Hash] arguments
     def post(path, arguments = {})
-      perform_request { connection.post(path, arguments).body }
+      perform_request { connection.post(path, arguments) }
     end
 
     # DisqusApi.v3.---->>[users]<<-----.details
@@ -67,7 +67,9 @@ module DisqusApi
 
     def perform_request
       yield.tap do |response|
-        raise InvalidApiRequestError.new(response) if response['code'] != 0
+        next if response.status == 200
+        fail ApiServerError, response.body if response.status / 100 == 5
+        fail InvalidApiRequestError, response.body
       end
     end
   end

@@ -1,5 +1,5 @@
 module DisqusApi
-  class InvalidApiRequestError < StandardError
+  class ApiServerError < StandardError
     attr_reader :response
 
     # @param [Hash] response
