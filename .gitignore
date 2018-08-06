@@ -2,6 +2,7 @@
 .yardoc
 rdoc
 coverage
+vendor/bundle
 .bundle
 .ruby-version
 .rvmrc
