@@ -20,10 +20,9 @@ Gem::Specification.new do |s|
   s.summary = %q{Disqus API for Ruby}
 
   s.add_runtime_dependency 'activesupport'
-  s.add_runtime_dependency 'faraday', '~> 0.9'
-  s.add_runtime_dependency 'faraday_middleware', '~> 0.10'
+  s.add_runtime_dependency 'faraday', '>= 0.9', '< 2.0'
+  s.add_runtime_dependency 'faraday_middleware', '>= 0.10', '< 2.0'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rspec-its'
   s.add_development_dependency 'rake'
 end
-
