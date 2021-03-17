@@ -1,6 +1,7 @@
 module DisqusApi
   class Api
     DEFAULT_VERSION = '3.0'
+    SERVER_ERROR_CODES = [15, 20, 21].freeze
     attr_reader :version, :endpoint, :specifications, :namespaces
 
     # @param [String] version
@@ -42,14 +43,14 @@ module DisqusApi
     # @param [String] path
     # @param [Hash] arguments
     def get(path, arguments = {})
-      perform_request { connection.get(path, arguments).body }
+      perform_request { connection.get(path, arguments) }
     end
 
     # Performs custom POST request
     # @param [String] path
     # @param [Hash] arguments
     def post(path, arguments = {})
-      perform_request { connection.post(path, arguments).body }
+      perform_request { connection.post(path, arguments) }
     end
 
     # DisqusApi.v3.---->>[users]<<-----.details
@@ -67,8 +68,18 @@ module DisqusApi
 
     def perform_request
       yield.tap do |response|
-        raise InvalidApiRequestError.new(response) if response['code'] != 0
+        return response.body if success? response
+        fail ApiServerError, response.body if server_error? response
+        fail InvalidApiRequestError, response.body
       end
+    end
+
+    def success?(response)
+      response.status == 200 && response.body['code'] == 0
+    end
+
+    def server_error?(response)
+      response.status / 100 == 5 || SERVER_ERROR_CODES.include?(response.body['code'])
     end
   end
 end
